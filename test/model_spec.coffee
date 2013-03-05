@@ -1,3 +1,4 @@
+tests   = require './test_helper'
 expect  = require('chai').expect
 
 Model = require 'model'
@@ -8,6 +9,7 @@ class Named extends Model
 
 class Numbered extends Model
   @field 'count', @Field.Int
+
 
 describe 'Models', ->
 
@@ -33,3 +35,21 @@ describe 'Models', ->
     badSet = -> numbered.count = 'too many!'
     expect(badSet).to.throw(Error, "Invalid int, 'too many!'")
     expect(numbered.count).to.not.exist
+
+  it 'should delegate events', (done) ->
+    model = new Named()
+
+    @on model, 'say', (name) ->
+      expect(name).to.equal 'Frankie'
+      done()
+
+    model.trigger 'say', 'Frankie'
+
+  it 'should be constructed with undefined values', ->
+    named = new Named()
+    expect(named.name).to.not.exist
+
+  it 'should set fields initialized in the constructor', ->
+    named = new Named()# name: 'Timothy') #, unused: 666)
+    expect(named.name).to.equal 'Timothy'
+    expect(named.unused).to.no.exist

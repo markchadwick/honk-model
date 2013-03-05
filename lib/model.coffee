@@ -1,4 +1,5 @@
-_ = require 'lodash'
+_       = require 'lodash'
+events  = require 'honk-events'
 
 
 class Model
@@ -10,6 +11,14 @@ class Model
     Object.defineProperty @prototype, name,
       get: -> type(value) if value
       set: (v) -> value = type(v)
+
+  constructor: (initParams) ->
+    events(this)
+
+    @update(initParams) if initParams?
+
+  update: (params) ->
+    (@[k]?.set?(v) for k, v of params)
 
 
 module.exports = Model

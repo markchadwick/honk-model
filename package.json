@@ -4,7 +4,9 @@
   "main":     "./lib/model.coffee",
   "dependencies": {
     "coffee-script":  ">= 1.5.0",
-    "lodash":         "1.0.x"
+    "lodash":         "1.0.x",
+
+    "honk-events":    "0.0.x"
   },
   "devDependencies": {
     "mocha":          "1.8.1",
