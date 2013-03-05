@@ -1,12 +1,12 @@
-{print} = require 'util'
 {spawn, exec} = require 'child_process'
+
 _ = require 'lodash'
 
 nodeBinary = (name) -> "node_modules/.bin/#{name}"
 
 launch = (cmd, options=[], callback) ->
   env = _.extend process.env,
-    NODE_PATH: "./src:#{process.env.NODE_PATH}"
+    NODE_PATH: "./lib:#{process.env.NODE_PATH}"
   proc = spawn cmd, options, env
   proc.stdout.pipe(process.stdout)
   proc.stderr.pipe(process.stderr)
