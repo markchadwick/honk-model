@@ -50,6 +50,6 @@ describe 'Models', ->
     expect(named.name).to.not.exist
 
   it 'should set fields initialized in the constructor', ->
-    named = new Named()# name: 'Timothy') #, unused: 666)
+    named = new Named(name: 'Timothy', unused: 666)
     expect(named.name).to.equal 'Timothy'
-    expect(named.unused).to.no.exist
+    expect(named.unused).to.not.exist

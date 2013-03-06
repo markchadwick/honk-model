@@ -7,18 +7,22 @@ class Model
 
   @field: (name, type) ->
     type or= Model.Field.NoOp
-    value = undefined
-    Object.defineProperty @prototype, name,
-      get: -> type(value) if value
-      set: (v) -> value = type(v)
+    prop =
+      get: -> type(@_fields[name]) if @_fields[name]
+      set: (v) -> @_fields[name] = type(v)
+
+    Object.defineProperty @prototype, name, prop
+    (this['_field_names'] or= []).push(name)
 
   constructor: (initParams) ->
     events(this)
 
+    @_fields = {}
     @update(initParams) if initParams?
 
   update: (params) ->
-    (@[k]?.set?(v) for k, v of params)
+    fieldNames = @constructor._field_names
+    @[k] = v for k, v of params when k in fieldNames
 
 
 module.exports = Model

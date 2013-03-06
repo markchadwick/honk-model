@@ -5,8 +5,7 @@
   "dependencies": {
     "coffee-script":  ">= 1.5.0",
     "lodash":         "1.0.x",
-
-    "honk-events":    "0.0.x"
+    "honk-events":    ">= 0.0.3"
   },
   "devDependencies": {
     "mocha":          "1.8.1",

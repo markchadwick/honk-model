@@ -1,10 +1,1 @@
-events  = require 'honk-events'
-
-
-beforeEach ->
-  events(this)
-
-afterEach ->
-  @destroy()
-
-module.exports = {}
+require 'honk-events/lib/tests'

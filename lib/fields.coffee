@@ -1,5 +1,10 @@
 _ = require 'lodash'
 
+class FieldDef
+
+class StringFieldDef extends FieldDef
+  convert: (v) -> String(v) if v?
+
 module.exports =
   NoOp:   (v) -> v
   String: (v) -> String(v) if v?
